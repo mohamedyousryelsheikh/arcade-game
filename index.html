@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .lives-wrapper {
+            position: absolute;
+            left: 37%;
+            top: 20%;
+        }
+
+        .lives-wrapper img {
+            float: left;
+            width: 25%;
+        }
+
+        .game-over-layer {
+            background: #fff;
+            border: 1px solid #c1c1c1;
+            position: absolute;
+            width: 71%;
+            margin: 0 auto;
+            text-align: center;
+            top: 18%;
+            height: 545px;
+            left: 15%;
+            
+            box-shadow: 1px 1px 78px #cecccc;
+        }
+
+        .game-over-layer div {
+            font: normal 54px arial;
+            margin-top:26%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Classic Arcade Game</h1>
+    <h2>Score: <span id="score"></span></h2>
+
+    <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/engine.js"></script>
+    <div id="lives">
+
+    </div>
+    <div class="game-over-layer" style="display: none">
+        <div class="">Game Over</div>
+        <button id="restartBtn" onclick="restartGame();">Restart</button>
+    </div>
+</body>
+
+</html>
