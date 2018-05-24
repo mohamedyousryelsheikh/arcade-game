@@ -17,13 +17,19 @@ class Enemy {
         // which will ensure the game runs at the same speed for
         // all computers.
 
-        if ((this.x >= player.x && this.x <= player.x + 10) && this.y == player.y) {
+         if ((player.x >= this.x - 40 && player.x <= this.x + 40) && (player.y >= this.y - 60 && player.y <= this.y + 60)) {
             //alert("case "+player.x+" and this.x "+this.x);
             player.reset();
             gameEnder--;
             life.lifeChecker(gameEnder);
             //score.resetScore();
         }
+        /*if (player.x >= this.x - 40 && player.x <= this.x + 40) {
+            if (player.y >= this.y - 40 && player.y <= this.y + 40) {
+                player.x = 200;
+                player.y = 400;
+            }
+        }*/
 
         else if (this.x < 500)
             this.x = Math.round(this.x + 500 * Math.random() * dt);
@@ -65,10 +71,10 @@ class Score {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-class PlayerGame {
+class Player {
     constructor(sprite) {
         this.sprite = sprite;
-
+        this.reset();
     }
     handleInput(movement) {
         let distanceToMove = 50;
@@ -115,7 +121,7 @@ class PlayerGame {
 
     reset() {
         this.x = 200;
-        this.y = 300;
+        this.y = 400;
 
     }
 }
@@ -140,7 +146,7 @@ class Lives {
         this.lifeChecker(count);
     }
     lifeChecker(getGameEnder) {
-         switch (true) {
+        switch (true) {
             case getGameEnder == 3:
                 document.getElementsByClassName("lives-wrapper")[0].innerHTML = "<span id='livesWrapper'><img src='" + this.sprite + "' /><img src='" + this.sprite + "' /><img src='" + this.sprite + "' /></span>";
                 console.log("case1");
@@ -153,7 +159,7 @@ class Lives {
                 document.getElementsByClassName("lives-wrapper")[0].innerHTML = "<span id='livesWrapper'><img src='" + this.sprite + "' /></span>";
                 console.log("case1");
                 break;
-             case getGameEnder == 0:
+            case getGameEnder == 0:
                 //document.getElementsByClassName("lives-wrapper")[0].innerHTML = "<span id='livesWrapper'><img src='" + this.sprite + "' /></span>";
                 console.log("gameover");
                 //score.resetScore();
@@ -174,31 +180,31 @@ class Lives {
 // Place the player object in a variable called player
 
 //initiate game with lives,score and lives
-var gameEnder = 1;
-var score = new Score(100);
+var gameEnder = 3;
+var score = new Score(0);
 //score.resetScore();
 //initiate lives
 var life = new Lives(gameEnder);
 life.render(gameEnder);
 
 //restart game
-function restartGame(){
-   document.getElementsByClassName("game-over-layer")[0].style.display = "none";
-   gameEnder = 3;
-   score.resetScore();
+function restartGame() {
+    document.getElementsByClassName("game-over-layer")[0].style.display = "none";
+    gameEnder = 3;
+    score.resetScore();
 
 }
 //document.getElementById("lives").innerHTML = score;
 //player
-var player = new PlayerGame('images/char-boy.png');
-player.reset();
+var player = new Player('images/char-boy.png');
+//player.reset();
 
 //enemies objects
 var enemy1 = new Enemy(0, 150);
 var enemy2 = new Enemy(0, 200);
 var enemy3 = new Enemy(0, 250);
 var enemy4 = new Enemy(0, 50);
-var allEnemies = [enemy1,enemy2,enemy3,enemy4];
+var allEnemies = [enemy1, enemy2, enemy3, enemy4];
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function (e) {
